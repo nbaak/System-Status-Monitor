@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Status{% endblock %}
+
+{% block content %}
+<h1>Status</h1>
+
+<div class="inner_content status_container">
+	{% if data is defined %}
+		{% for d in data %}
+			<div class="host">
+				<div>
+					<h3>{{d.host}}</h3>
+				</div>
+				<div>
+					<div class="storage">
+						<b>Storage</b>
+						<span class="total">Total: {{d.storage.total}} GB</span>
+						<span class="free">Free: {{d.storage.free}} GB</span>
+						<span class="used">Used: {{d.storage.used}} GB</span>
+						<div class="item progress">
+						  <div class="progress-bar warning" role="progressbar" style="width: {{d.storage.used/d.storage.total *100}}%" aria-valuenow="{{d.storage.used/d.storage.total *100}}" aria-valuemin="0" aria-valuemax="100">{{d.storage.percent}} %</div>
+						</div>
+						
+					</div>
+					
+					<div class="memory">
+						<b>Memory</b>
+						<span class="total">Total: {{d.memory.total}} GB</span>
+						<span class="free">Free: {{d.memory.free}} GB</span>
+						<span class="used">Used: {{d.memory.used}} GB</span>
+						<div class="item progress">
+						  <div class="progress-bar warning" role="progressbar" style="width: {{d.memory.used/d.memory.total *100}}%"aria-valuenow="{{d.memory.used/d.memory.total *100}}" aria-valuemin="0" aria-valuemax="100">{{d.memory.percent}} %</div>
+						</div>
+					</div>
+					
+					<div class="temperature">
+						<b>Temperature</b>						
+						{% for cpu in d.cpu.temperature %}
+							<div class="item cpu temperature">
+								<b>{{cpu.label}}</b>
+								<span>current:{{cpu.current}}°C</span>/<span>critical:{{cpu.critical}}°C</span>
+								<div class="progress">
+								  <div class="progress-bar warning" role="progressbar" style="width: {{cpu.current/cpu.critical *100}}%"aria-valuenow="{{cpu.current/cpu.critical *100}}" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</div>						
+						{% endfor %}					
+					</div>
+					
+					<div class=frequencies>
+						<b>CPU</b>
+						<div>Usage:</div>
+						{% for cpu in d.cpu.percent %}
+							<div class="item cpu usage">
+								<b>{{cpu.label}}</b>
+								<div class="progress">
+								  <div class="progress-bar" role="progressbar" style="width: {{cpu}}%"aria-valuenow="{{cpu}}" aria-valuemin="0" aria-valuemax="100">{{cpu}}</div>
+								</div>
+							</div>						
+						{% endfor %}					
+						
+						
+						<div>Frequencies:</div>
+						{% for cpu in d.cpu.frequencys %}
+							<div class="item cpu frequencies">
+								<b>{{cpu.label}}</b>
+								<span>min:{{cpu.min}} MHz</span>/<span>current:{{cpu.current}} MHz</span>/<span>max:{{cpu.max}} MHz</span>
+								<div class="progress">
+								  <div class="progress-bar" role="progressbar" style="width: {{cpu.current/cpu.max *100}}%"aria-valuenow="{{cpu.current/cpu.max *100}}" aria-valuemin="{{cpu.min/cpu.max *100}}" aria-valuemax="100"></div>
+								</div>
+							</div>						
+						{% endfor %}					
+					</div>
+					
+				</div>
+			</div>
+		{% endfor %}
+	{% else %}
+		No Data		
+	{% endif %}
+</div>
+{% endblock %}

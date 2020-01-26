@@ -1,0 +1,32 @@
+body {
+	;
+}
+
+div.content_background {
+	position: fixed;
+	height: 100%;
+	width: 80%;
+	margin-left: 10%;
+	margin-right: auto;
+	opacity: 0.4;
+	
+	z-index: 10;
+}
+
+div.content {
+	position: relative;
+	
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	
+	z-index: 100;
+}
+
+div.host {
+	margin-bottom: 100px;
+}
+
+.item {
+	margin-left:  5%;
+}

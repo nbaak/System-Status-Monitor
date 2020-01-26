@@ -1,0 +1,6 @@
+{
+	"servers": [
+		{"name": "Friday", "address": "http://192.168.178.33", "port": 5555},
+		{"name": "Jarvis", "address": "http://127.0.0.1"}
+	]
+}
