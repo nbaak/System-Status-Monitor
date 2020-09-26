@@ -27,7 +27,7 @@ async def get_data(name, address, port = 5555, endpoint = "/status"):
     print (name, address, port)
     
     try:
-        url = f"{address}:{port}{endpoint}"        
+        url = f"{address}:{port}{endpoint}"
         json_data = await HTTPClient.get(url)
         data = json.loads(json_data)
         data['host'] = name
